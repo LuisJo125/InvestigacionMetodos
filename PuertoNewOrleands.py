@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-from PIL import Image, ImageTk  # Necesitas instalar Pillow (pip install pillow)
+from PIL import Image, ImageTk  
 import random
 import matplotlib.pyplot as plt
 
@@ -36,7 +36,11 @@ def ejecutar_simulacion(dias_simulacion):
 
     for dia in range(1, dias_simulacion + 1):
         llegadas = generar_valor(llegadas_prob)
-        descargas = generar_valor(descargas_prob)
+        if llegadas == 0 and retrasos == 0:
+            descargas = 0
+        else:
+            descargas = generar_valor(descargas_prob)
+        
         total_llegadas += llegadas
         
         # Barcazas a descargar hoy
@@ -106,10 +110,14 @@ def generar_graficos():
 
 def limpiar_tabla(tree_id, boton_graficar_id, boton_limpiar_id):
     # Limpiar la tabla y ocultar los botones de gráfica y limpiar
+    global llegadas_diarias, descargas_diarias, retrasos_diarias
     canvas.delete(tree_id)
     canvas.delete(boton_graficar_id)
     canvas.delete(boton_limpiar_id)
     resultado_label.config(text="")
+    llegadas_diarias = []
+    descargas_diarias = []
+    retrasos_diarias = []
 
 # Crear la ventana principal
 ventana = tk.Tk()
