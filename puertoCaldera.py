@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk, messagebox
+import webbrowser
 from PIL import Image, ImageTk
 import random
 import matplotlib.pyplot as plt
@@ -398,7 +399,7 @@ def ver_simulaciones_guardadas():
     top.geometry("1100x500")
     top.resizable(False, False)
 
-    columns = ("ID", "Días", "Total Llegadas", "Total Descargas", "Retraso Promedio", "Total Retrasos", "GananciaT otal", "Pérdida Total", "Total", "Acciones")
+    columns = ("ID", "Días", "Total Llegadas", "Total Descargas", "Retraso Promedio", "Total Retrasos", "Ganancia Total", "Pérdida Total", "Total Neto", "Acciones")
     tree = ttk.Treeview(top, columns=columns, show='headings', height=20)
     for col in columns:
         tree.heading(col, text=col)
@@ -437,6 +438,11 @@ def ver_simulaciones_guardadas():
 
     #boton_graficar_comparativo = ttk.Button(top, text="Generar Gráfica Comparativa", command=generar_graficos_comparativos)
     #boton_graficar_comparativo.pack(pady=10)
+
+    
+
+def abrir_enlace():
+    webbrowser.open("https://app.powerbi.com/view?r=eyJrIjoiYzNmZDIyZGMtY2YzNC00NmMzLTkyNWMtYjAyMjdlMWZlNzQwIiwidCI6ImU3OTg0Y2FjLTI1NDMtNGY4OC04Zjk3LTk1MjQzMzVlNmJjNCIsImMiOjR9")
 
 def generar_graficos_comparativos():
     """Generar gráficos comparativos de todas las simulaciones guardadas"""
@@ -521,6 +527,9 @@ boton_ver_simulaciones.pack(side="left", padx=10, pady=10)
 # Botón para limpiar el archivo de simulaciones guardadas
 boton_limpiar_simulaciones = ttk.Button(otros_botones_frame, text="Limpiar Reportes Guardados", command=limpiar_simulaciones_guardadas)
 boton_limpiar_simulaciones.pack(side="left", padx=10, pady=10)
+
+#boton_enlace = ttk.Button(otros_botones_frame, text="Abrir Dasbord", command=abrir_enlace)
+#boton_enlace.pack(pady=20)
 
 # Etiqueta para mostrar resultados
 resultado_label = ttk.Label(canvas, text="", font=("Helvetica", 12))
